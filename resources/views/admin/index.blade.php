@@ -1,1 +1,2 @@
-index.blade.php
+@extends('layouts.admin')
+
