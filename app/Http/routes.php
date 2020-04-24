@@ -22,5 +22,10 @@ Route::get('/home', 'HomeController@index');
 Route::get('/admin',function(){
 	return view('admin.index');
 });
+/**
+* Use middleware to ristrict access and for security
+*/
+Route::group(['middleware'=>'admin'],function(){
+	Route::resource('admin/users','AdminUsersController');
+});
 
-Route::resource('admin/users','AdminUsersController');

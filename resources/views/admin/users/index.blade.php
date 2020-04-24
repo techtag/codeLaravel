@@ -1,6 +1,9 @@
 @extends('layouts.admin')
 
 @section('content')
+	@if(Session::has('user_form_message'))
+		<p class='bg-danger'>{{session('user_form_message')}}</p>
+	@endif
 	<h1>Users</h1>
 	<table class="table">
 	    <thead>
