@@ -19,8 +19,8 @@
 			{!! Form::select('is_active',array(0=>'Inactive',1=>'Active'),0,['class'=>'form-control']) !!}
 		</div>				
 		<div class="form-group">
-			{!! Form::label('file','File') !!}
-			{!! Form::file('file',['class'=>'form-file']) !!}
+			{!! Form::label('photo_id','File') !!}
+			{!! Form::file('photo_id',['class'=>'form-file']) !!}
 		</div>	
 		<div class="form-group">
 			{!! Form::label('password','Password') !!}
