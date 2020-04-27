@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 	@if(Session::has('post_form_message'))
-		<p class='bg-danger'>{{session('post_form_message')}}</p>
+		<p class='bg-danger padding-y-sm'>{{session('post_form_message')}}</p>
 	@endif
 	<h1>Posts</h1>
 	<table class="table">
@@ -26,7 +26,7 @@
 	        <td>{{$post->user->name}}</td>
 	        <td>{{$post->category->name}}</td>	        
 	        <td><a href="{{route('admin.posts.edit',$post->id)}}">{{$post->title}}</a></td>	        
-	        <td>{{$post->body}}</td>	        
+	        <td>{{str_limit($post->body,20)}}</td>	        
 	        <td>{{$post->created_at->diffForHumans()}}</td>
 	        <td>{{$post->updated_at->diffForHumans()}}</td>
 	      </tr>
