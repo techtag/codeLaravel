@@ -20,7 +20,7 @@ class AdminPostsController extends Controller
      */
     public function index()
     {
-        $posts=Post::all();        
+        $posts=Post::paginate(2);        
         return view('admin.posts.index',compact('posts'));
     }
 
@@ -31,7 +31,7 @@ class AdminPostsController extends Controller
      */
     public function create()
     {
-        $categories=Category::lists('name','id')->all();
+        $categories=Category::pluck('name','id')->all();
         return view('admin.posts.create',compact('categories'));
     }
 
@@ -78,7 +78,7 @@ class AdminPostsController extends Controller
     public function edit($id)
     {
         $post=Post::findOrFail($id);
-        $categories=Category::lists('name','id')->all();
+        $categories=Category::pluck('name','id')->all();
         return view('admin.posts.edit',compact('post','categories'));
     }
 
@@ -91,16 +91,18 @@ class AdminPostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $input=$request->all();
+       
+        $input=$request->all();       
         if($file=$request->file('photo_id')){
             $name=time().$file->getClientOriginalName();
             $file->move('images',$name);
             $photo=Photo::create(['file'=>$name]);
             $input['photo_id']=$photo->id;
         }
+        //$post->slug = null;
         Auth::user()->posts()->whereId($id)->first()->update($input);        
         Session::flash('post_form_message','Post has been updated');
-        return redirect('/admin/posts');
+        return redirect('/admin/posts');        
     }
 
     /**
@@ -119,5 +121,12 @@ class AdminPostsController extends Controller
         //Auth::user()->posts()->whereId($id)->first()->delete();
         Session::flash('post_form_message','Post has been deleted');
         return redirect('/admin/posts');
+    }
+
+    public function post($slug){
+
+        $post=Post::findBySlugOrFail($slug);
+        $comments=$post->comments()->whereIsActive(1)->get();
+        return view('post',compact('post','comments'));
     }
 }

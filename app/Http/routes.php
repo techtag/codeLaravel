@@ -19,15 +19,25 @@ Route::auth();
 
 Route::get('/home', 'HomeController@index');
 
-Route::get('/admin',function(){
-	return view('admin.index');
-});
+Route::get('/post/{slug}',['as'=>'home.post','uses'=>'AdminPostsController@post']); // named route for blog post
 /**
 * Use middleware to ristrict access and for security
 */
 Route::group(['middleware'=>'admin'],function(){
+	Route::get('/admin',function(){
+		return view('admin.index');
+	});
 	Route::resource('admin/users','AdminUsersController');
 	Route::resource('admin/posts','AdminPostsController');
 	Route::resource('admin/categories','AdminCategoriesController');
+	Route::resource('admin/media','AdminMediasController');
+
+	//Route::get('admin/media/upload',['as'=>'admin.media.upload','uses'=>'AdminMediasController@upload']); // custom named route
+
+	Route::resource('admin/comments','PostCommentsController');
+	Route::resource('admin/comments/replies','CommentRepliesController');
 });
 
+Route::group(['middleware'=>'auth'],function(){
+	Route::post('comment/reply','CommentRepliesController@createReply');
+});
