@@ -9,6 +9,8 @@
 
                 <div class="panel-body">
                     Your Application's Landing Page.
+
+                    {{bcrypt('Npatel99!')}}
                 </div>
             </div>
         </div>

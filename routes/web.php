@@ -15,9 +15,9 @@ Auth::routes();
 
 Route::get('/logout', 'Auth\LoginController@logout');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', 'HomeController@index');
+
+Route::get('/post/{slug}',['as'=>'home.post','uses'=>'AdminPostsController@post']); // named route for blog post
 
 Route::group(['middleware'=>'auth'],function(){
     Route::post('comment/reply','CommentRepliesController@createReply');
@@ -25,9 +25,7 @@ Route::group(['middleware'=>'auth'],function(){
 
 Route::group(['middleware'=>'admin'], function(){
 
-    Route::get('/admin', function(){
-        return view('admin.index');
-    });
+    Route::get('/admin','AdminController@index');
 
     Route::resource('admin/users', 'AdminUsersController',['names'=>[
         'index'=>'admin.users.index',
@@ -37,7 +35,7 @@ Route::group(['middleware'=>'admin'], function(){
     ]]);
 
 
-    Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post']);
+    Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'HomeController@post']);
 
     Route::resource('admin/posts', 'AdminPostsController',['names'=>[
         'index'=>'admin.posts.index',
