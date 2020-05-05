@@ -1,9 +1,6 @@
 @extends('layouts.admin')
 @section('content')
-	<h1>Categories</h1>
-	@if(Session::has('category_form_message'))
-		<p class='bg-danger padding-y-sm'>{{session('category_form_message')}}</p>
-		@endif
+	<h1>Categories</h1>	
 	<div class="col-sm-4">
 		{!! Form::open(['method'=>'POST','action'=>'AdminCategoriesController@store']) !!}
 			<div class="form-group">

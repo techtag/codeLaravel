@@ -16,7 +16,7 @@
                             <a href="{{route('home.post',$post->slug)}}">{{$post->title}}</a>
                         </h2>
                         <p class="lead">
-                            by <a href="index.php">{{$post->user->name}}</a>
+                            by {{$post->user->name}}
                         </p>
                         <p><span class="glyphicon glyphicon-time"></span> Posted {{$post->created_at->diffForHumans()}}</p>
                         <hr>
@@ -29,15 +29,11 @@
                     @endforeach
                 @endif
 
-                <!-- Pager -->
-                <ul class="pager">
-                    <li class="previous">
-                        <a href="#">&larr; Older</a>
-                    </li>
-                    <li class="next">
-                        <a href="#">Newer &rarr;</a>
-                    </li>
-                </ul>
+                <div class="row">
+                    <div class="col-sm-6 col-sm-offset-5">
+                        {{$posts->render()}}
+                    </div>
+                </div>
 
             </div>
             {{-- Blog Side bar --}}

@@ -1,8 +1,5 @@
 @extends('layouts.admin')
-@section('content')
-	@if(Session::has('post_form_message'))
-		<p class='bg-danger padding-y-sm'>{{session('post_form_message')}}</p>
-	@endif
+@section('content')	
 	<h1>Posts</h1>
 	<table class="table">
 	    <thead>

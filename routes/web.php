@@ -17,7 +17,7 @@ Route::get('/logout', 'Auth\LoginController@logout');
 
 Route::get('/', 'HomeController@index');
 
-Route::get('/post/{slug}',['as'=>'home.post','uses'=>'AdminPostsController@post']); // named route for blog post
+Route::get('/post/{slug}',['as'=>'home.post','uses'=>'HomeController@post']); // named route for blog post
 
 Route::group(['middleware'=>'auth'],function(){
     Route::post('comment/reply','CommentRepliesController@createReply');

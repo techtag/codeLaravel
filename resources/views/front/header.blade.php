@@ -11,7 +11,8 @@
 
     <title>CodeHacking Blog Post</title>
 
-   <link rel="stylesheet" type="text/css" href="{{asset('css/libs.css')}}">
-
+   	<link href="{{asset('css/libs.css')}}" rel="stylesheet">
+    <!-- Bootstrap Core CSS -->
+    <link href="{{asset('css/app.css')}}" rel="stylesheet">
 </head>
 <body>
